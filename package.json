@@ -1,0 +1,21 @@
+{
+  "name": "typeflow",
+  "version": "1.0.0",
+  "private": true,
+  "description": "TypeFlow — premium typing and keyboard productivity learning platform",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently -p \"[{name}]\" -n \"server,client\" -c \"blue,green\" \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "build": "npm --prefix server run build && npm --prefix client run build",
+    "start": "npm --prefix server run start",
+    "seed": "npm --prefix server run seed",
+    "db:push": "npm --prefix server run db:push"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "drizzle-orm": "^0.45.2"
+  }
+}
