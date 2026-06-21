@@ -29,11 +29,11 @@ export interface Shortcut {
 export type GetPracticeContentParams = {
   mode?: "words" | "paragraphs" | "quotes" | "code"; count?: number;
 };
-
+const API_BASE = "https://typeflow-z2ad.onrender.com";
 // ─── Fetch helper ─────────────────────────────────────────────────────────────
 
 async function apiFetch<T>(url: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(url, init);
+  const res = await fetch(`${API_BASE}${url}`, init);
   if (!res.ok) {
     let msg = `HTTP ${res.status}`;
     try { const d = await res.json() as { error?: string }; if (d?.error) msg += `: ${d.error}`; } catch { /* noop */ }
