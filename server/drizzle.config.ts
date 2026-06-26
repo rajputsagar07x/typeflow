@@ -1,10 +1,13 @@
+import "dotenv/config";
 import { defineConfig } from "drizzle-kit";
+
+console.log(process.env.DATABASE_URL);
 
 export default defineConfig({
   schema: "./src/schema.ts",
   out: "./drizzle",
   dialect: "postgresql",
   dbCredentials: {
-    url: "postgresql://postgres:instant%4032920078@localhost:5432/typeflow",
+    url: process.env.DATABASE_URL!,
   },
 });
