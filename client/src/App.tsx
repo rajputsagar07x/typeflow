@@ -20,7 +20,7 @@ import ContentAdmin from "@/pages/admin/ContentAdmin";
 import ShortcutsAdmin from "@/pages/admin/ShortcutsAdmin";
 import AchievementsAdmin from "@/pages/admin/AchievementsAdmin";
 import HomepageAdmin from "@/pages/admin/HomepageAdmin";
-
+import UserTrackingAdmin from "@/pages/admin/UserTrackingAdmin";
 const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 5 * 60 * 1000, retry: 1 } },
 });
@@ -43,7 +43,13 @@ function AppRoutes() {
         <Route path="/owner-admin/shortcuts"><AdminLayout><ShortcutsAdmin /></AdminLayout></Route>
         <Route path="/owner-admin/achievements"><AdminLayout><AchievementsAdmin /></AdminLayout></Route>
         <Route path="/owner-admin/homepage"><AdminLayout><HomepageAdmin /></AdminLayout></Route>
-        <Route component={NotFound} />
+        <Route path="/owner-admin/user-tracking">
+  <AdminLayout>
+    <UserTrackingAdmin />
+  </AdminLayout>
+</Route>
+
+<Route component={NotFound} />
       </Switch>
     </AnimatePresence>
   );

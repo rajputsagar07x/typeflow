@@ -38,6 +38,13 @@ export default function Shortcuts() {
 
   const practiceShortcuts = shortcuts ?? [];
   const currentShortcut = practiceShortcuts[practiceIndex];
+  useEffect(() => {
+  if (!currentShortcut) return;
+
+  fetch(`http://localhost:5000/api/tracking/shortcut/${currentShortcut.id}`, {
+    method: "POST",
+  });
+}, [currentShortcut]);
 
   const totalCompleted = Object.keys(progress).length;
 
@@ -56,6 +63,9 @@ export default function Shortcuts() {
       const allMatch = expected.every((k) => actual.includes(k)) && actual.every((k) => expected.includes(k));
       if (allMatch) {
         setFeedback("correct");
+        fetch(`http://localhost:5000/api/tracking/shortcut/${currentShortcut.id}`, {
+  method: "POST",
+}).catch(() => {});
         const newProgress = { ...progress, [currentShortcut.id]: (progress[currentShortcut.id] ?? 0) + 1 };
         setProgress(newProgress);
         saveShortcutProgress(newProgress);

@@ -3,7 +3,7 @@ import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
 import {
   Keyboard, LayoutDashboard, BookOpen, Type, Command,
-  Trophy, Globe, LogOut, ChevronRight, Menu, X,
+  Trophy, Globe, LogOut, ChevronRight, Menu, X, Users
 } from "lucide-react";
 import { isLoggedIn, logout } from "@/lib/adminApi";
 
@@ -14,6 +14,7 @@ const navItems = [
   { href: "/owner-admin/shortcuts", label: "Shortcuts", icon: Command },
   { href: "/owner-admin/achievements", label: "Achievements", icon: Trophy },
   { href: "/owner-admin/homepage", label: "Homepage", icon: Globe },
+  { href: "/owner-admin/user-tracking", label: "User Tracking", icon: Users },
 ];
 
 interface AdminLayoutProps {

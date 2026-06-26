@@ -33,7 +33,7 @@ export default function Practice() {
   const [finished, setFinished] = useState(false);
   const [result, setResult] = useState<Result | null>(null);
   const [typed, setTyped] = useState("");
-  const [timeLeft, setTimeLeft] = useState<Duration>(60);
+  const [timeLeft, setTimeLeft] = useState<number>(60);
   const [wpm, setWpm] = useState(0);
   const [accuracy, setAccuracy] = useState(100);
   const startTimeRef = useRef<number | null>(null);
@@ -57,6 +57,9 @@ export default function Practice() {
 
   const finishSession = useCallback(
     (typedSoFar: string) => {
+      fetch("http://localhost:5000/api/tracking/practice", {
+  method: "POST",
+});
       if (timerRef.current) clearInterval(timerRef.current);
       let correct = 0;
       for (let i = 0; i < typedSoFar.length; i++) {
@@ -77,6 +80,9 @@ export default function Practice() {
       setResult(r);
       setFinished(true);
       addStat({ date: new Date().toISOString(), wpm: finalWpm, accuracy: finalAcc, duration, mode });
+      fetch("http://localhost:5000/api/tracking/practice", {
+  method: "POST",
+}).catch(() => {});
     },
     [text, duration, mode]
   );
@@ -102,9 +108,11 @@ export default function Practice() {
           setTimeLeft((prev) => {
             if (prev <= 1) {
               finishSession(newTyped);
-              return 0;
+              setTimeLeft(0 as any);
+finishSession(newTyped);
+return prev;
             }
-            return (prev - 1) as Duration;
+            return prev - 1;
           });
         }, 1000);
       }
@@ -133,6 +141,7 @@ export default function Practice() {
       if (newTyped.length >= text.length) {
         finishSession(newTyped);
       }
+    
     },
     [typed, started, finished, text, finishSession]
   );

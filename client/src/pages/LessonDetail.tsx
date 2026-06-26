@@ -5,6 +5,7 @@ import { ArrowLeft, CheckCircle2, RotateCcw, ChevronRight } from "lucide-react";
 import { useGetLesson, getGetLessonQueryKey } from "@/lib/apiClient";
 import { addStat, markLessonComplete, recordMistake } from "@/lib/stats";
 
+
 function TypingArea({
   text,
   onComplete,
@@ -136,6 +137,13 @@ export default function LessonDetail() {
   const { id } = useParams<{ id: string }>();
   const lessonId = parseInt(id ?? "0", 10);
   const [, setLocation] = useLocation();
+  useEffect(() => {
+  if (!lessonId) return;
+
+  fetch(`http://localhost:5000/api/tracking/lesson/${lessonId}`, {
+    method: "POST",
+  });
+}, [lessonId]);
 
   const { data: lesson, isLoading } = useGetLesson(lessonId, {
     query: { enabled: !!lessonId, queryKey: getGetLessonQueryKey(lessonId) },

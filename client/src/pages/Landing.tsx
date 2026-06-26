@@ -112,6 +112,11 @@ const faqs = [
 export default function Landing() {
   const get = useHomepageContent();
   const heroLines = get("hero_title").split("\n");
+useEffect(() => {
+  fetch("http://localhost:5000/api/tracking/visit", {
+    method: "POST",
+  }).catch(() => {});
+}, []);
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">

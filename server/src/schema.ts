@@ -56,3 +56,28 @@ export const usersTable = pgTable("users", {
   picture: text("picture"),
   provider: text("provider").notNull().default("google"),
 });
+export const trackingTable = pgTable("tracking", {
+  id: serial("id").primaryKey(),
+  totalVisitors: integer("total_visitors").notNull().default(0),
+  uniqueVisitors: integer("unique_visitors").notNull().default(0),
+  visitorsToday: integer("visitors_today").notNull().default(0),
+  visitorsThisWeek: integer("visitors_this_week").notNull().default(0),
+  totalPracticeSessions: integer("total_practice_sessions").notNull().default(0),
+});
+
+export const lessonViewsTable = pgTable("lesson_views", {
+  id: serial("id").primaryKey(),
+  lessonId: integer("lesson_id").notNull(),
+  views: integer("views").notNull().default(0),
+});
+
+export const shortcutViewsTable = pgTable("shortcut_views", {
+  id: serial("id").primaryKey(),
+  shortcutId: integer("shortcut_id").notNull(),
+  views: integer("views").notNull().default(0),
+});
+
+export const practiceSessionsTable = pgTable("practice_sessions", {
+  id: serial("id").primaryKey(),
+  mode: text("mode").notNull(),
+});
