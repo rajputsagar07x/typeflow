@@ -29,7 +29,7 @@ export interface Shortcut {
 export type GetPracticeContentParams = {
   mode?: "words" | "paragraphs" | "quotes" | "code"; count?: number;
 };
-const API_BASE = "http://localhost:5000";
+const API_BASE = import.meta.env.VITE_API_URL;
 // ─── Fetch helper ─────────────────────────────────────────────────────────────
 
 async function apiFetch<T>(url: string, init?: RequestInit): Promise<T> {
@@ -109,7 +109,7 @@ export function useGetShortcuts<TData = Shortcut[]>(
   q.queryKey = queryKey; return q;
 }
 export async function getTrackingStats() {
-  const res = await fetch("http://localhost:5000/api/tracking");
+  const res = await fetch(`${API_BASE}/api/tracking`);
 
   if (!res.ok) {
     throw new Error("Failed to load tracking stats");

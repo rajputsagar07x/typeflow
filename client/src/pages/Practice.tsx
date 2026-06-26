@@ -57,7 +57,7 @@ export default function Practice() {
 
   const finishSession = useCallback(
     (typedSoFar: string) => {
-      fetch("http://localhost:5000/api/tracking/practice", {
+    fetch(`${import.meta.env.VITE_API_URL}/api/tracking/practice`, {
   method: "POST",
 });
       if (timerRef.current) clearInterval(timerRef.current);
@@ -80,7 +80,7 @@ export default function Practice() {
       setResult(r);
       setFinished(true);
       addStat({ date: new Date().toISOString(), wpm: finalWpm, accuracy: finalAcc, duration, mode });
-      fetch("http://localhost:5000/api/tracking/practice", {
+      fetch(`${import.meta.env.VITE_API_URL}/api/tracking/practice`, {
   method: "POST",
 }).catch(() => {});
     },

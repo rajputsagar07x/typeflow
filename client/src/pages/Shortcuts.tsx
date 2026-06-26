@@ -41,7 +41,7 @@ export default function Shortcuts() {
   useEffect(() => {
   if (!currentShortcut) return;
 
-  fetch(`http://localhost:5000/api/tracking/shortcut/${currentShortcut.id}`, {
+  fetch(`${import.meta.env.VITE_API_URL}/api/tracking/shortcut/${currentShortcut.id}`, {
     method: "POST",
   });
 }, [currentShortcut]);
@@ -63,7 +63,7 @@ export default function Shortcuts() {
       const allMatch = expected.every((k) => actual.includes(k)) && actual.every((k) => expected.includes(k));
       if (allMatch) {
         setFeedback("correct");
-        fetch(`http://localhost:5000/api/tracking/shortcut/${currentShortcut.id}`, {
+       fetch(`${import.meta.env.VITE_API_URL}/api/tracking/shortcut/${currentShortcut.id}`, {
   method: "POST",
 }).catch(() => {});
         const newProgress = { ...progress, [currentShortcut.id]: (progress[currentShortcut.id] ?? 0) + 1 };

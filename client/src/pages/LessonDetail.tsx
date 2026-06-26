@@ -140,7 +140,7 @@ export default function LessonDetail() {
   useEffect(() => {
   if (!lessonId) return;
 
-  fetch(`http://localhost:5000/api/tracking/lesson/${lessonId}`, {
+ fetch(`${import.meta.env.VITE_API_URL}/api/tracking/lesson-view`, {
     method: "POST",
   });
 }, [lessonId]);

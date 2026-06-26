@@ -17,11 +17,11 @@ useEffect(() => {
   getTrackingStats()
     .then((data) => setStats(data))
     .catch(console.error);
-    fetch("http://localhost:5000/api/lesson-stats")
+    fetch(`${import.meta.env.VITE_API_URL}/api/lesson-stats`)
   .then((r) => r.json())
   .then(setLessonStats);
 
-fetch("http://localhost:5000/api/shortcut-stats")
+fetch(`${import.meta.env.VITE_API_URL}/api/shortcut-stats`)
   .then((r) => r.json())
   .then(setShortcutStats);
 }, []);

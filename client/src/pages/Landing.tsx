@@ -113,7 +113,7 @@ export default function Landing() {
   const get = useHomepageContent();
   const heroLines = get("hero_title").split("\n");
 useEffect(() => {
-  fetch("http://localhost:5000/api/tracking/visit", {
+  fetch(`${import.meta.env.VITE_API_URL}/api/tracking/visit`, {
     method: "POST",
   }).catch(() => {});
 }, []);
